@@ -40,6 +40,8 @@
 //
 //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+/* **IMPORTANT** 此文件已经由`mp4box`项目移至`XwWizard`项目。*/
+
 using System;
 using System.Runtime.InteropServices;
 

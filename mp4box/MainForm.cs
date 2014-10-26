@@ -20,6 +20,7 @@
 // -------------------------------------------------------------------
 //
 
+#define CHECK_TOOLS
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,6 +40,7 @@ using System.Configuration;
 using System.Drawing.Imaging;
 using System.Net;
 using System.Linq;
+using XwWizard;
 namespace mp4box
 {
     public partial class MainForm : Form
@@ -769,7 +771,7 @@ namespace mp4box
 
         private void button1_Click(object sender, EventArgs e)
         {
-            MessageBox.Show(String.Format(" \r\n有任何建议或疑问可以通过以下方式联系小丸。\nQQ：57655408\n微博：weibo.com/xiaowan3\n百度贴吧ID：小丸到达\n\n\t\t\t发布日期：2012年10月17日\n\t\t\t- ( ゜- ゜)つロ 乾杯~"), "关于", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            //MessageBox.Show(String.Format(" \r\n有任何建议或疑问可以通过以下方式联系小丸。\nQQ：57655408\n微博：weibo.com/xiaowan3\n百度贴吧ID：小丸到达\n\n\t\t\t发布日期：2012年10月17日\n\t\t\t- ( ゜- ゜)つロ 乾杯~"), "关于", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
         private void btnvextract_Click(object sender, EventArgs e)
         {
@@ -976,12 +978,14 @@ namespace mp4box
             //define workpath
             startpath = System.Windows.Forms.Application.StartupPath;
             workPath = startpath + "\\tools";
+#if CHECK_TOOLS
             if (!Directory.Exists(workPath))
             {
                 MessageBox.Show("tools文件夹没有解压喔~ 工具箱里没有工具的话运行不起来的喔~", "（这只丸子）",
                     MessageBoxButtons.OK, MessageBoxIcon.Error);
                 Environment.Exit(1);
             }
+#endif
             //Directory.CreateDirectory(workPath);
             //string diskSymbol = startpath.Substring(0, 1);
 
@@ -3543,6 +3547,11 @@ namespace mp4box
             File.WriteAllText(batpath, ffmpeg, UnicodeEncoding.Default);
             LogRecord(aac);
             System.Diagnostics.Process.Start(batpath);
+        }
+
+        private void btnWizard_Click(object sender, EventArgs e)
+        {
+            new XwWizard.FormWizard().ShowDialog();
         }
     }
 }
