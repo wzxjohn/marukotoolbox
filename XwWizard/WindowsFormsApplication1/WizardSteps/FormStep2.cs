@@ -66,20 +66,30 @@ namespace XwWizard.WizardSteps
         {
             if (!IsVideo())
             {
-                MessageBox.Show(FormWizard.VideoFilePath + "\n不是视频！", "你在玩我",
+                MessageBox.Show(FormWizard.VideoFilePath + "\n不是视频！", "你又在玩我",
                     MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
                 FormWizard.VideoFilePath = null;
                 return;
             }
 
             FormWizard.NeedEncode = NeedEncode();
-            if (!FormWizard.NeedEncode)//不需要转码，直接直接封装
+            if (FormWizard.NeedEncode)
             {
-                WizardParent.SwitchToNextStep();
-                return;
+                FormWizard.NeedMux = false;
             }
+            else
+            {
+                FormWizard.NeedMux = NeedMux();
+            }
+            //if (!FormWizard.NeedEncode)//不需要转码，直接直接封装
+            //{
+            //    WizardParent.SwitchToNextStep();
+            //    return;
+            //}
 
-            //Need Encode
+            ////Need Encoding
+            //WizardParent.SwitchToNextStep();
+
             WizardParent.SwitchToNextStep();
         }
 
@@ -90,8 +100,8 @@ namespace XwWizard.WizardSteps
         private bool IsVideo()
         {
             //FormWizard.VideoFilePath
-            //TODO: 判断这个文件是否是视频文件
-            return true;
+            //判断这个文件是否是视频文件（是否存在视频流）
+            return MediaInfoTool.IsVideo(FormWizard.VideoFilePath);
         }
 
         /// <summary>
@@ -100,9 +110,14 @@ namespace XwWizard.WizardSteps
         /// <returns></returns>
         private bool NeedEncode()
         {
-            //TODO: 判断是否需要转码
+            //判断是否需要转码
             //H264 + (AAC/MP3)则不需要
-            return true;
+            return MediaInfoTool.NeedEncoding(FormWizard.VideoFilePath);
+        }
+
+        private bool NeedMux()
+        {
+            return MediaInfoTool.NeedMux(FormWizard.VideoFilePath);
         }
     }
 }

@@ -51,8 +51,7 @@ namespace XwWizard.WizardSteps
                 //FormWizard.VideoFilePath;
                 //FormWizard.OutputFilePath;
 
-
-                FormWizard.NeedMux = false;//这个不要去掉
+                FormWizard.NeedMux = false;//这个不要去掉，转码时直接转成FLV，不用再封装
             }
 
             if (FormWizard.NeedMux)
