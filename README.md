@@ -1,9 +1,10 @@
-﻿小丸工具箱 / Maruko's Toolbox
+小丸工具箱 / Maruko's Toolbox
 ===========================
 A Video-prosessing GUI
 
-Mirror of https://marukotoolbox.codeplex.com/
-TODO: Add Homepage
+* Homepage: http://maruko.appinn.me/
+* https://marukotoolbox.codeplex.com (primary)
+* https://github.com/marukotoolbox/marukotoolbox (mirror)
 
 界面 / Screenshots
 ================
